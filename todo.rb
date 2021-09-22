@@ -7,11 +7,11 @@ class Todo
     @completed = completed
   end
 
-  def due_later
+  def dueLater
     @due_date > Date.today
   end
 
-  def due_today
+  def dueToday
     @due_date == Date.today
   end
 
@@ -20,9 +20,7 @@ class Todo
   end
 
   def to_displayable_string
-    display_status = @completed ? "[x]" : "[ ]"
-    display_date = @due_date == Date.today ? "" : @sdue_date
-    "#{display_status} #{@text} #{display_date}"
+    "#{@completed ? "[x]" : "[ ]"} #{@text} #{@due_date == Date.today ? "" : @sdue_date}"
   end
 end
 
@@ -36,15 +34,15 @@ class TodosList
   end
 
   def overdue
-    TodosList.new(@todos.filter { |todo| todo.overdue})
+    TodosList.new(@todos.filter { |todo| todo.overdue })
   end
 
   def due_today
-    TodosList.new(@todos.filter { |todo| todo.due_today })
+    TodosList.new(@todos.filter { |todo| todo.dueToday })
   end
 
   def due_later
-    TodosList.new(@todos.filter { |todo| todo.due_later })
+    TodosList.new(@todos.filter { |todo| todo.dueLater })
   end
 
   def to_displayable_list
